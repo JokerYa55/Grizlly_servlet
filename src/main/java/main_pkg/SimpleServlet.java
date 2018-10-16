@@ -7,6 +7,7 @@ package main_pkg;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import javax.persistence.EntityManager;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -19,7 +20,9 @@ import javax.servlet.http.HttpServletResponse;
  */
 @WebServlet(name = "SimpleServlet", urlPatterns = {"/simple"})
 public class SimpleServlet extends HttpServlet {
-
+    
+    private EntityManager em;
+    
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -33,6 +36,7 @@ public class SimpleServlet extends HttpServlet {
             out.println("<body>");
             out.println("<h1>Servlet fdhsfdhsfhdfgh dfghNewServlet at " + request.getContextPath() + "</h1>");
             out.println("<br>session = " + request.getSession().getId());
+            out.println("<br>em = " + Main.getEM().toString());
             out.println("</body>")  ;
             out.println("</html>");
         }
