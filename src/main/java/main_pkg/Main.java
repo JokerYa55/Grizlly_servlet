@@ -43,6 +43,7 @@ public class Main {
         // Another non-Jersey servlet
         ServletAdapter simpleServletAdapter = new ServletAdapter();
         simpleServletAdapter.setContextPath("/simple");
+        simpleServletAdapter.setProperty( "load-on-startup", 1 );
         simpleServletAdapter.setServletInstance(new SimpleServlet());
         // register all above defined adapters
         gws.addGrizzlyAdapter(jerseyAdapter, new String[]{"/jersey"});
