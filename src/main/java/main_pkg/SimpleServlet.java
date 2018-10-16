@@ -7,7 +7,9 @@ package main_pkg;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 import javax.persistence.EntityManager;
+import javax.persistence.TypedQuery;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -36,7 +38,14 @@ public class SimpleServlet extends HttpServlet {
             out.println("<body>");
             out.println("<h1>Servlet fdhsfdhsfhdfgh dfghNewServlet at " + request.getContextPath() + "</h1>");
             out.println("<br>session = " + request.getSession().getId());
-            out.println("<br>em = " + Main.getEM().toString());
+            
+            em = Main.getEM();
+            
+            TypedQuery<TUsers> query = em.createNamedQuery("TUsers.findAll", TUsers.class);
+            List<TUsers> usersList = query.getResultList();
+            usersList.forEach((t) -> {
+                out.println("user = " + t.toString() + "<br>");
+            });
             out.println("</body>")  ;
             out.println("</html>");
         }
