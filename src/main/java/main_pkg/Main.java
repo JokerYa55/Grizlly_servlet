@@ -5,11 +5,13 @@
  */
 package main_pkg;
 
-import com.sun.grizzly.http.embed.GrizzlyWebServer; 
-import com.sun.grizzly.http.servlet.ServletAdapter; 
+import com.sun.grizzly.http.embed.GrizzlyWebServer;
+import com.sun.grizzly.http.servlet.ServletAdapter;
 import com.sun.jersey.spi.container.servlet.ServletContainer;
 import java.io.IOException;
-
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 
 /**
  *
@@ -20,6 +22,15 @@ public class Main {
     /**
      * @param args the command line arguments
      */
+    private static EntityManagerFactory emf = null;
+
+    public static EntityManager getEM() {
+        if (emf == null) {
+            emf = Persistence.createEntityManagerFactory("base_JPA");
+        }
+        return emf.createEntityManager();
+    }
+
     public static void main(String[] args) throws IOException {
         // static content is linked from here
         GrizzlyWebServer gws = new GrizzlyWebServer(8080, "/var/www");
