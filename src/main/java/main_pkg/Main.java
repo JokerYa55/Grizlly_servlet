@@ -46,7 +46,7 @@ public class Main {
         simpleServletAdapter.setProperty( "load-on-startup", 1);
         simpleServletAdapter.setServletInstance(new SimpleServlet());
         
-        /*ServletAdapter freemarkerAdapter = new ServletAdapter();
+        ServletAdapter freemarkerAdapter = new ServletAdapter();
         
         freemarkerAdapter.setServletInstance(new freemarker.ext.servlet.FreemarkerServlet());
         freemarkerAdapter.addInitParameter("TemplatePath", "/var/www");
@@ -56,7 +56,7 @@ public class Main {
         freemarkerAdapter.addInitParameter("template_update_delay", "0");
         freemarkerAdapter.addInitParameter("default_encoding", "UTF-8");
         freemarkerAdapter.addInitParameter("number_format", "0.##########");
-        freemarkerAdapter.setProperty( "load-on-startup", 1);*/
+        freemarkerAdapter.setProperty( "load-on-startup", 1);
         //freemarkerAdapter.add
         
         
@@ -64,7 +64,7 @@ public class Main {
         // register all above defined adapters
         gws.addGrizzlyAdapter(jerseyAdapter, new String[]{"/jersey"});
         gws.addGrizzlyAdapter(simpleServletAdapter, new String[]{"/simple"});
-        //gws.addGrizzlyAdapter(freemarkerAdapter, new String[]{"*.ftl"});
+        gws.addGrizzlyAdapter(freemarkerAdapter, new String[]{"*.ftl"});
         // let Grizzly run
         gws.start();
     }

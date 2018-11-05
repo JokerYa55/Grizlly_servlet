@@ -33,7 +33,7 @@ public class SimpleServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         HttpSession session = request.getSession();       
 
-        getServletContext().getRequestDispatcher("/WEB-INF/ftl/template.ftl").forward(request, response);
+        getServletContext().getRequestDispatcher("/WEB-INF/ftl/main.ftl").forward(request, response);
         //response.sendRedirect("/index.html");
         
 //        try (PrintWriter out = response.getWriter()) {
