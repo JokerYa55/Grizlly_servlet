@@ -43,11 +43,28 @@ public class Main {
         // Another non-Jersey servlet
         ServletAdapter simpleServletAdapter = new ServletAdapter();
         simpleServletAdapter.setContextPath("/simple");
-        simpleServletAdapter.setProperty( "load-on-startup", 1 );
+        simpleServletAdapter.setProperty( "load-on-startup", 1);
         simpleServletAdapter.setServletInstance(new SimpleServlet());
+        
+        ServletAdapter freemarkerAdapter = new ServletAdapter();
+        
+        freemarkerAdapter.setServletInstance(new freemarker.ext.servlet.FreemarkerServlet());
+        freemarkerAdapter.addInitParameter("TemplatePath", "/var/www");
+        freemarkerAdapter.addInitParameter("NoCache", "true");
+        freemarkerAdapter.addInitParameter("NoCache", "true");
+        freemarkerAdapter.addInitParameter("ContentType", "text/html; charset=UTF-8");
+        freemarkerAdapter.addInitParameter("template_update_delay", "0");
+        freemarkerAdapter.addInitParameter("default_encoding", "UTF-8");
+        freemarkerAdapter.addInitParameter("number_format", "0.##########");
+        freemarkerAdapter.setProperty( "load-on-startup", 1);
+        //freemarkerAdapter.add
+        
+        
+        
         // register all above defined adapters
         gws.addGrizzlyAdapter(jerseyAdapter, new String[]{"/jersey"});
         gws.addGrizzlyAdapter(simpleServletAdapter, new String[]{"/simple"});
+        gws.addGrizzlyAdapter(freemarkerAdapter, new String[]{"*.ftl"});
         // let Grizzly run
         gws.start();
     }

@@ -31,41 +31,43 @@ public class SimpleServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        HttpSession session = request.getSession();
-        System.out.println("is new = " + session.isNew());
+        HttpSession session = request.getSession();       
 
-        try (PrintWriter out = response.getWriter()) {
-
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet jhgjh jhg jhgkjhgkjhgjhgNewServlet</title>");
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet fdhsfdhsfhdfgh dfghNewServlet at " + request.getContextPath() + "</h1>");
-            out.println("<br>session = " + session.getId() + "<br>");
-            try {
-                out.println("<br>old_date = " + session.getAttribute("date").toString() + "<br>");
-            } catch (Exception e) {
-                out.println("<br>Error old_date = " + e.getMessage() + "<br>");
-            }
-            session.setAttribute("date", new Date());
-            out.println("<br>new_date = " + session.getAttribute("date").toString() + "<br>");
-
-            em = Main.getEM();
-
-            TypedQuery<TUsers> query = em.createNamedQuery("TUsers.findAll", TUsers.class);
-            List<TUsers> usersList = query.getResultList();
-            usersList.forEach((t) -> {
-                out.println("user = " + t.toString() + "<br>");
-            });
-            out.println("</body>");
-            out.println("</html>");
-        }
-        System.out.println("session close");
-
-        session.invalidate();
+        getServletContext().getRequestDispatcher("template.ftl").forward(request, response);
+        //response.sendRedirect("/index.html");
+        
+//        try (PrintWriter out = response.getWriter()) {
+//
+//            /* TODO output your page here. You may use following sample code. */
+//            out.println("<!DOCTYPE html>");
+//            out.println("<html>");
+//            out.println("<head>");
+//            out.println("<title>Servlet jhgjh jhg jhgkjhgkjhgjhgNewServlet</title>");
+//            out.println("</head>");
+//            out.println("<body>");
+//            out.println("<h1>Servlet fdhsfdhsfhdfgh dfghNewServlet at " + request.getContextPath() + "</h1>");
+//            out.println("<br>session = " + session.getId() + "<br>");
+//            try {
+//                out.println("<br>old_date = " + session.getAttribute("date").toString() + "<br>");
+//            } catch (Exception e) {
+//                out.println("<br>Error old_date = " + e.getMessage() + "<br>");
+//            }
+//            session.setAttribute("date", new Date());
+//            out.println("<br>new_date = " + session.getAttribute("date").toString() + "<br>");
+//
+//            em = Main.getEM();
+//
+//            TypedQuery<TUsers> query = em.createNamedQuery("TUsers.findAll", TUsers.class);
+//            List<TUsers> usersList = query.getResultList();
+//            usersList.forEach((t) -> {
+//                out.println("user = " + t.toString() + "<br>");
+//            });
+//            out.println("</body>");
+//            out.println("</html>");
+//        }
+//        System.out.println("session close");
+//
+//        session.invalidate();
 //        Cookie[] cookies = request.getCookies();
 //        for (Cookie cookie : cookies) {
 //            cookie.setMaxAge(0);
